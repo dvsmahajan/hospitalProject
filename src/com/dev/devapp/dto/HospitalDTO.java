@@ -57,4 +57,10 @@ public class HospitalDTO implements Serializable {
 		this.hospitalWebsite = hospitalWebsite;
 	}
 
+	@Override
+	public String toString() {
+		return "HospitalDTO [hospitalId=" + hospitalId + ", hospitalName=" + hospitalName + ", hospitalLocation="
+				+ hospitalLocation + ", hospitalWebsite=" + hospitalWebsite + "]";
+	}
+
 }

@@ -11,5 +11,6 @@
 	<classpathentry kind="lib" path="C:/Users/user/Desktop/hibernate/javassist-3.17.1-GA.jar"/>
 	<classpathentry kind="lib" path="C:/Users/user/Desktop/hibernate/jboss-logging-3.3.0.Final.jar"/>
 	<classpathentry kind="lib" path="C:/Users/user/Desktop/hibernate/mysql-connector-java-5.1.5-bin.jar"/>
+	<classpathentry kind="lib" path="C:/Users/user/Desktop/singleton.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
