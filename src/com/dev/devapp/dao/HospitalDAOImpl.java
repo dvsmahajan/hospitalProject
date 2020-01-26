@@ -2,6 +2,7 @@ package com.dev.devapp.dao;
 
 import java.util.List;
 
+import org.hibernate.HibernateException;
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -46,7 +47,7 @@ public class HospitalDAOImpl implements HospitalDAO {
 		Session session = HibernateUtil.getFactory().openSession();
 		// preparing the query
 		Query query = session.createQuery(hql);
-		//processing the query
+		// processing the query
 		HospitalDTO hospitalDTO = (HospitalDTO) query.uniqueResult();
 		return hospitalDTO;
 	}
@@ -57,8 +58,8 @@ public class HospitalDAOImpl implements HospitalDAO {
 		Session session = HibernateUtil.getFactory().openSession();
 		// preparing the query
 		Query query = session.createQuery(hql);
-		//processing the query
-		List hospitalDTO =  query.list();
+		// processing the query
+		List hospitalDTO = query.list();
 		return hospitalDTO;
 	}
 
@@ -68,13 +69,48 @@ public class HospitalDAOImpl implements HospitalDAO {
 		Session session = HibernateUtil.getFactory().openSession();
 		// preparing the query
 		Query query = session.createQuery(hql);
-		//processing the query
-		List<Object[]> objects =  query.list();
+		// processing the query
+		List<Object[]> objects = query.list();
 		return objects;
 	}
-	
-	//update HospitalDTO set hospitalWebsite='' where hospitalName=''
-	//delete from HospitalDTO where hospitalId=''
+
+	@Override
+	public HospitalDTO getHospitalByIdNamedParamter(int id) {
+
+		String hql = "select hdto from HospitalDTO hdto where hdto.hospitalId=:hId";
+		Session session = HibernateUtil.getFactory().openSession();
+		// preparing the query
+		Query query = session.createQuery(hql);
+		query.setParameter("hId", id);
+		// query.setParameter("hweb", hospitalWebsite);
+		// processing the query
+		HospitalDTO hospitalDTO = (HospitalDTO) query.uniqueResult();
+
+		return hospitalDTO;
+	}
+
+	@Override
+	public void updateHospitalWebsiteByHospitalName(String website, String hospitalName) {
+		Transaction tx = null;
+		try {
+
+			Session session = HibernateUtil.getFactory().openSession();
+
+			tx = session.beginTransaction();
+			Query query = session.getNamedQuery("updatehospitalWebsiteByName").setParameter(0, website).setParameter(1,
+					hospitalName);
+			int i = query.executeUpdate();
+			System.out.println(i);
+			tx.commit();
+			session.close();
+		} catch (HibernateException e) {
+			tx.rollback();
+			e.printStackTrace();
+		}
+	}
+
+	// update HospitalDTO set hospitalWebsite='' where hospitalName=''
+	// delete from HospitalDTO where hospitalId=''
 
 	/*
 	 * @Override public HospitalDTO getHos(int id) { Configuration configuration

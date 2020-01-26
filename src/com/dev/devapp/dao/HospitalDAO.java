@@ -12,6 +12,8 @@ public interface HospitalDAO {
 	public HospitalDTO getHospitalById(int id);
 	public List<HospitalDTO> getAllHospital();
 	public List<Object[]> getHospitalNameAndLocationById(); 
+	public HospitalDTO getHospitalByIdNamedParamter(int id);
+	public void updateHospitalWebsiteByHospitalName(String website,String hospitalName);
 	
 
 }

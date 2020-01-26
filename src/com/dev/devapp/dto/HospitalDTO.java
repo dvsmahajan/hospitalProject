@@ -5,10 +5,13 @@ import java.io.Serializable;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 
 @Entity
 @Table(name = "hospital_tble")
+@NamedQuery(name="updatehospitalWebsiteByName",query="update HospitalDTO hdto set hdto.hospitalWebsite=? where hdto.hospitalName=?")
+@NamedQuery(name="",query)
 public class HospitalDTO implements Serializable {
 
 	@Id
